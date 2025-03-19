@@ -1,0 +1,26 @@
+name: Strip
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  strip:
+    name: Strip
+    runs-on: windows-latest
+    env:
+      tag: "v0.1.0"
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Strip variable
+        run: |
+          $tag = $env:tag
+          $tag = $tag -replace 'v', ''
+          echo "::set-env name=tag::$tag"
+
+      - name: Print tag
+        run: echo $env:tag
