@@ -19,8 +19,8 @@ jobs:
       - name: Strip variable
         run: |
           $tag = $env:tag
-          $tag = $tag -replace 'v', ''
-          echo "::set-env name=tag::$tag"
+          $version = $tag -replace '^v', ''
+          echo "version=$version" >> $GITHUB_ENV
 
       - name: Print tag
-        run: echo $env:tag
+        run: echo ${{ env.version }}
