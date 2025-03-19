@@ -13,15 +13,12 @@ jobs:
       tag: "v0.1.0"
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
       - name: Strip variable
         shell: pwsh
         run: |
           $tag = $env:tag
           $version = $tag -replace '^v', ''
-          echo "version=$version" >> $GITHUB_ENV
+          echo "version=$version" >> $env:GITHUB_ENV
 
       - name: Print tag
         run: echo ${{ env.version }}
